@@ -7,15 +7,15 @@ Original file is located at
     https://colab.research.google.com/drive/1bzraoB64x586dsPty5NVKvy_CAr4HpEi
 """
 
-!pip install -q datasets pandas pymongo sentence_transformers
+# !pip install -q datasets pandas pymongo sentence_transformers
 
-!pip install -q accelerate
+# !pip install -q accelerate
 
-!pip install pymongo[srv]
+# !pip install pymongo[srv]
 
 import pymongo
 import pandas as pd
-from google.colab import userdata
+# from google.colab import userdata
 
 # Connect to MongoDB
 # VNLaws
@@ -41,7 +41,7 @@ df = pd.DataFrame(data)
 
 df.head()
 
-!pip install sentence_transformers
+# !pip install sentence_transformers
 
 from sentence_transformers import SentenceTransformer
 embedding_model = SentenceTransformer("keepitreal/vietnamese-sbert")
