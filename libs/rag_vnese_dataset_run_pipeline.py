@@ -7,21 +7,21 @@ Original file is located at
     https://colab.research.google.com/drive/1Mc6tNEQn8o1MwAqChnwzp_f3YxHheNKp
 """
 
-!pip install -q datasets pandas pymongo sentence_transformers
+# !pip install -q datasets pandas pymongo sentence_transformers
 
-!pip install -q accelerate
+# !pip install -q accelerate
 
-!pip install pymongo[rsv]
+# !pip install pymongo[rsv]
 
 import pymongo
 import pandas as pd
 
-from google.colab import userdata
+# from google.colab import userdata
 
 client = pymongo.MongoClient(userdata.get('mongo_url'))
 
-db = client["hoanghamonbilenew"]
-collection = db['embedding_for_vector_search']
+db = client["VNLawsDB"]
+collection = db['VNLawsCollection']
 
 def to_markdown(text):
   text = text.replace('.',' *')
