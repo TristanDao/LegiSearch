@@ -26,6 +26,10 @@ env/
 ENV/
 .venv
 
+# Environment variables
+.env
+.env.local
+
 # Streamlit
 .streamlit/
 
@@ -40,10 +44,8 @@ ENV/
 # Models and Data (uncomment if you don't want to track these)
 models/
 # data/
+old_pages/
 
-# Environment variables
-.env
-.env.local
 
 
 
