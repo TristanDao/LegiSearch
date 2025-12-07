@@ -58,6 +58,24 @@ answer = rag.generate_answer(
 print(answer["answer"])
 print(answer["sources"])
 ```
+Kết quả trả về là:
+return {
+    "answer": answer,
+    "sources": sources,
+    "query": query,
+    "search_mode": mode
+}
+Data trong sources:
+sources =  {
+                "van_ban"
+                "tieu_de",
+                "loai_heading",
+                "noi_dung",
+                "score",
+                "search_type"
+            }
+        
+
 
 ### Cách 2: Sử dụng convenience functions
 
