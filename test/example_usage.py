@@ -2,8 +2,15 @@
 """
 Example usage of the RAG system
 This file demonstrates how to use the LegalRAGSystem
-Chạy: python example_usage.py
+Chạy: python test/example_usage.py hoặc python -m test.example_usage
 """
+import sys
+from pathlib import Path
+
+# Add parent directory to path để import libs
+parent_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(parent_dir))
+
 from libs.search import LegalRAGSystem, search_legal_documents, ask_legal_question
 
 def example_basic_search():
@@ -64,10 +71,20 @@ def example_basic_search():
     try:
         results = rag.search(query, mode="hybrid")
         if results:
-            print(f"Tìm thấy {len(results)} kết quả:\n")
-            for i, result in enumerate(results, 1):
+            # Remove duplicates trước khi in
+            seen = set()
+            unique_results = []
+            for result in results:
+                key = f"{result.get('van_ban', '')}_{result.get('tieu_de', '')}"
+                if key not in seen:
+                    seen.add(key)
+                    unique_results.append(result)
+            
+            print(f"Tìm thấy {len(unique_results)} kết quả (sau khi loại bỏ trùng lặp):\n")
+            for i, result in enumerate(unique_results, 1):
                 print(f"{i}. {result['tieu_de']}")
                 print(f"   Score: {result['score']:.4f}")
+                print(f"   Văn bản: {result.get('van_ban', 'N/A')}")
                 print()
         else:
             print("⚠️  Không tìm thấy kết quả nào!")
@@ -148,8 +165,8 @@ if __name__ == "__main__":
     
     # Uncomment example bạn muốn chạy:
     
-    # example_basic_search()
-    example_qa()
+    example_basic_search()
+    # example_qa()
     # example_convenience_functions()
     
     print("\n⚠️  Lưu ý:")

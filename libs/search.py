@@ -301,7 +301,18 @@ Trả lời:"""
             reverse=True
         )
         
-        return sorted_results[:limit]
+        # Remove duplicates based on document ID to ensure unique results
+        seen_keys = set()
+        unique_results = []
+        for result in sorted_results:
+            key = f"{result.get('van_ban', '')}_{result.get('tieu_de', '')}"
+            if key not in seen_keys:
+                seen_keys.add(key)
+                unique_results.append(result)
+                if len(unique_results) >= limit:
+                    break
+        
+        return unique_results
     
     def search(
         self,
