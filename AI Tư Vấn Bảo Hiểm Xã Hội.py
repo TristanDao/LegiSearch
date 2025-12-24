@@ -101,7 +101,7 @@ def get_rag_system():
     return LegalRAGSystem()
 
 if "rag_system" not in st.session_state:
-    with st.spinner("Initializing AI system, please wait..."):
+    with st.spinner("Hệ thống đang khởi động. Vui lòng chờ trong giây lát... "):
         from libs.search import LegalRAGSystem
         st.session_state.rag_system = get_rag_system()
 
@@ -127,10 +127,10 @@ if prompt:
     # Generate AI response
     if chat_container is not None:
         with chat_container:
-            with st.spinner("Hệ thống đang truy xuất dữ liệu. Vui lòng chờ trong giây lát... ⏳"):
+            with st.spinner("Hệ thống đang truy xuất dữ liệu. Vui lòng chờ trong giây lát... "):
                 response = rag_system.generate_answer(prompt, mode="hybrid")
     else:
-        with st.spinner("Hệ thống đang truy xuất dữ liệu. Vui lòng chờ trong giây lát... ⏳"):
+        with st.spinner("Hệ thống đang truy xuất dữ liệu. Vui lòng chờ trong giây lát... "):
             response = rag_system.generate_answer(prompt, mode="hybrid")
         
     # create fake response

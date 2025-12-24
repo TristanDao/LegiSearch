@@ -184,7 +184,7 @@ members = [
     {
         "name": "Ngô Phạm Thế Duy",
         "student_id": "25210013",
-        "image_path": "Source\\TheDuy.webp"
+        "image_path": "Source\\Duy.jpg"
     },
     {
         "name": "Đào Phước Thịnh",
@@ -204,12 +204,12 @@ members = [
     {
         "name": "Hoàng Tùng",
         "student_id": "25210049",
-        "image_path": "Source\\TheDuy.webp"
+        "image_path": "Source\\Tung.jpg"
     },
     {
         "name": "Trần Xuân Hòa",
         "student_id": "25210016",
-        "image_path": "Source\\TheDuy.webp"
+        "image_path": "Source\\Hoa.jpg"
     }
 ]
 
