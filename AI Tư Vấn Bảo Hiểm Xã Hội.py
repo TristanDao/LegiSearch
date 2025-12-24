@@ -22,7 +22,7 @@ def get_base64_of_bin_file(bin_file: str) -> str:
 
 
 # --- Page config must be first ---
-st.set_page_config(page_title="AI tư vấn bảo hiểm xã hội", page_icon=":robot_face:")
+st.set_page_config(page_title="AI TƯ VẤN BẢO HIỂM XÃ HỘI VIỆT NAM", page_icon=":robot_face:")
 
 # Load images
 BG_PATH = Path(r"D:\UIT\AI\LegiSearch\Source\LawAI.jpg")
@@ -118,7 +118,7 @@ else:
                 st.markdown(message["content"])
 
 # --- Input ---
-prompt = st.chat_input("What's up?")
+prompt = st.chat_input("Vui lòng nhập câu hỏi của bạn về bảo hiểm xã hội.")
 
 if prompt:
     # Add user's message to history
