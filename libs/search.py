@@ -6,7 +6,7 @@ Supports keyword search, semantic search, and hybrid search
 import os
 from typing import List, Dict, Optional, Literal
 from dotenv import load_dotenv
-from langchain_openai import AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI, ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
 from .utils import get_embedding, get_mongodb_collection
@@ -46,39 +46,46 @@ class LegalRAGSystem:
         # Initialize prompt template
         self.prompt_template = self._create_prompt_template()
     
-    def _init_llm(self) -> AzureChatOpenAI:
+    def _init_llm(self) -> ChatOpenAI:
         """
-        Initialize Azure OpenAI LLM from environment variables.
+        Initialize OpenAI LLM from environment variables.
         
         Returns:
-            AzureChatOpenAI: Initialized LLM
+            ChatOpenAI: Initialized LLM
         """
-        azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-        azure_api_key = os.getenv("AZURE_OPENAI_API_KEY")
-        azure_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-        api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
+        # azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+        # azure_api_key = os.getenv("AZURE_OPENAI_API_KEY")
+        # azure_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+        # api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
         
-        if not all([azure_endpoint, azure_api_key, azure_deployment]):
-            raise ValueError(
-                "Missing Azure OpenAI configuration. Please set in .env file:\n"
-                "- AZURE_OPENAI_ENDPOINT\n"
-                "- AZURE_OPENAI_API_KEY\n"
-                "- AZURE_OPENAI_DEPLOYMENT_NAME\n"
-                "- AZURE_OPENAI_API_VERSION (optional, default: 2024-02-15-preview)"
-            )
+        # if not all([azure_endpoint, azure_api_key, azure_deployment]):
+        #     raise ValueError(
+        #         "Missing Azure OpenAI configuration. Please set in .env file:\n"
+        #         "- AZURE_OPENAI_ENDPOINT\n"
+        #         "- AZURE_OPENAI_API_KEY\n"
+        #         "- AZURE_OPENAI_DEPLOYMENT_NAME\n"
+        #         "- AZURE_OPENAI_API_VERSION (optional, default: 2024-02-15-preview)"
+        #     )
         
-        # Ensure all values are strings (not None)
-        assert azure_endpoint is not None
-        assert azure_api_key is not None
-        assert azure_deployment is not None
+        # # Ensure all values are strings (not None)
+        # assert azure_endpoint is not None
+        # assert azure_api_key is not None
+        # assert azure_deployment is not None
         
-        return AzureChatOpenAI(
-            azure_endpoint=azure_endpoint,
-            azure_deployment=azure_deployment,
-            api_version=api_version,
-            api_key=azure_api_key,  # type: ignore
-            temperature=0.7
-        )
+        # return AzureChatOpenAI(
+        #     azure_endpoint=azure_endpoint,
+        #     azure_deployment=azure_deployment,
+        #     api_version=api_version,
+        #     api_key=azure_api_key,  # type: ignore
+        #     temperature=0.7
+        # )
+        api_key = os.getenv("OPENAI_API_KEY")
+        model_name = os.getenv("OPENAI_MODEL_NAME")
+        if not api_key:
+            raise ValueError("Missing OpenAI API key. Please set in .env file.")
+        if not model_name:
+            raise ValueError("Missing OpenAI model name. Please set in .env file.")
+        return ChatOpenAI(api_key=api_key, model=model_name, temperature=0.7)
     
     def _create_prompt_template(self) -> ChatPromptTemplate:
         """

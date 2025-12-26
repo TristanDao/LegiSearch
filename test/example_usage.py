@@ -165,8 +165,8 @@ if __name__ == "__main__":
     
     # Uncomment example bạn muốn chạy:
     
-    example_basic_search()
-    # example_qa()
+    # example_basic_search()
+    example_qa()
     # example_convenience_functions()
     
     print("\n⚠️  Lưu ý:")
